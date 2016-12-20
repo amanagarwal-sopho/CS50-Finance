@@ -1,5 +1,5 @@
 <div>
-    <table class="table table-striped">
+    <table class="table table-hover">
         <thead>
         <tr>
             <th>SYMBOL</th>

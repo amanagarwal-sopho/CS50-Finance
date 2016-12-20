@@ -1,11 +1,15 @@
-<form action="addfunds.php" method="post">
+<form class="form-inline" action="addfunds.php" method="post">
     <fieldset>
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="amount" placeholder="Amount(Limit:$10k)" type="text"/>
+            <label class="sr-only" for="exampleInputAmount">Amount (in $)</label>
+        <div class="input-group">
+            <div class="input-group-addon">$</div>
+            <input autocomplete="off" autofocus class="form-control" id=exampleInputAmount name="amount" placeholder="Amount(Limit:$10k)" type="text"/>
+            <div class="input-group-addon">.00</div>
+        </div>
         </div>
         <div class="form-group">
-            <button class="btn btn-default" type="submit">
-                <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>
+            <button class="btn btn-primary" type="submit">
                 Add Funds
             </button>
         </div>

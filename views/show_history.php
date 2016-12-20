@@ -11,6 +11,7 @@
         </thead>
         <tbody align="left">
         <?php
+            
             foreach($positions as $position)
             {
                 print("<tr>");
