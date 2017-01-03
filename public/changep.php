@@ -9,8 +9,10 @@
     
     if($_SERVER["REQUEST_METHOD"]== "POST")
     {
-        if(!isset($_POST["currp"])|| !isset($_POST["newp"]))
+        if(!isset($_POST["currp"])|| !isset($_POST["newp"]) || !isset($_POST["confirmp"]))
         apologize("Password not entered");
+        else if($_POST["confirmp"]!=$_POST["newp"])
+        apologize("Password confirmation failed");
         else
         {
             $row=CS50::query("SELECT * FROM users where id=?",$_SESSION["id"]);
