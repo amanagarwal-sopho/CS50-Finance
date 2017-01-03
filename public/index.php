@@ -18,10 +18,7 @@
                         "shares" => $row["share"],
                         "symbol" => $row["symbol"]
                         ];
-            
         }
-        
-        
     }
     
     //To determine the cash the user has

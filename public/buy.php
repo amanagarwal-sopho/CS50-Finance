@@ -12,29 +12,26 @@
     else if($_SERVER["REQUEST_METHOD"]=="POST")
     {
         $stock=lookup($_POST["symbol"]);
-        
         if($stock==false)
-        apologize("Stock Symbol Invalid.");
+        apologize("Stock symbol invalid.");
         else if(preg_match("/^\d+$/",$_POST["shares"])==false || $_POST["shares"]==0)
-        apologize("Enter a valid number of shares");
+        apologize("Enter a valid number of shares.");
         else
         {
-        $row=CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
+            $row=CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
         
-        if($stock["price"]*$_POST["shares"]>$row[0]["cash"])
-        {
-            apologize("Insufficient Funds");
-        }
+            if($stock["price"]*$_POST["shares"]>$row[0]["cash"])
+            {
+                apologize("Insufficient Funds.");
+            }
         
-        else
-        {
-            $cost=$stock["price"]*$_POST["shares"];
-            CS50::query("INSERT INTO portfolios (user_id,symbol,share) VALUES(?,?,?) ON DUPLICATE KEY UPDATE share=share+ VALUES(share)",$_SESSION["id"],strtoupper($_POST["symbol"]),$_POST["shares"]);
-            CS50::query("UPDATE users SET cash= cash - ? WHERE id=?",$cost,$_SESSION["id"]);
-            CS50::query("INSERT INTO transactions (user_id,type,symbol,price,shares,time) VALUES(?,'BUY',?,?,?,CURRENT_TIMESTAMP)",$_SESSION["id"],$_POST["symbol"],$stock["price"],$_POST["shares"]);
-            
-        }
-        
+            else
+            {
+                $cost=$stock["price"]*$_POST["shares"];
+                CS50::query("INSERT INTO portfolios (user_id,symbol,share) VALUES(?,?,?) ON DUPLICATE KEY UPDATE share=share+ VALUES(share)",$_SESSION["id"],strtoupper($_POST["symbol"]),$_POST["shares"]);
+                CS50::query("UPDATE users SET cash= cash - ? WHERE id=?",$cost,$_SESSION["id"]);
+                CS50::query("INSERT INTO transactions (user_id,type,symbol,price,shares,time) VALUES(?,'BUY',?,?,?,CURRENT_TIMESTAMP)",$_SESSION["id"],$_POST["symbol"],$stock["price"],$_POST["shares"]);
+            }
         }
         
         redirect("index.php");
