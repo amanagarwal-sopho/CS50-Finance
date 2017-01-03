@@ -20,6 +20,8 @@
         apologize("Confirm your password ");
         else if ($_POST["password"]!=$_POST["confirmation"])
         apologize("Passwords do not match try again.");
+        else if (!isset($_POST["terms"]))
+        apologize("Please agree to our terms to complete registration.");
         else
         {
             $insert_user=CS50::query("INSERT IGNORE INTO users (username,hash,cash) VALUES(?,?,10000.0000)",$_POST["username"],password_hash($_POST["password"],PASSWORD_DEFAULT));
