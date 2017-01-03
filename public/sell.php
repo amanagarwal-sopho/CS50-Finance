@@ -27,7 +27,6 @@
         
         else
         apologize("Please Select a Stock to Sell");
-        
         redirect("/");
         
     }

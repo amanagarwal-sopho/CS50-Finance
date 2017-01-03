@@ -11,13 +11,13 @@
     {
         if($_POST["amount"]<=0 || $_POST["amount"]> 10000)
         {
-            apologize("Please Enter a Valid Amount");
+            apologize("Please enter a valid amount");
         }
         
         else
         {
             CS50::query("UPDATE users SET cash = cash + ? WHERE id=?",$_POST["amount"],$_SESSION["id"]);
-            render("add_success.php",["title" => "Funds Added Successfully"]);
+            render("add_success.php",["title" => "Funds added successfully"]);
         }
     }
     
