@@ -9,18 +9,16 @@
         render("quote_form.php",["title" => "Quote"]);
     }
     
-    
     else if($_SERVER["REQUEST_METHOD"]== "POST" )
     {
         if(empty($_POST["symbol"]))
-        apologize("Please Enter a Stock Symbol to get quotes");
+        apologize("Please enter a stock symbol to get quotes");
         
         else
         {   
-            
             $stock=lookup($_POST["symbol"]);
             if($stock==false)
-            apologize("Stock symbol is Invalid.");
+            apologize("Stock symbol is invalid.");
             else
             render("quote.php",$stock);
         }
