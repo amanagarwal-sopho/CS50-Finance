@@ -15,12 +15,11 @@
                 ?>
             </select>
         </div>
-            <div class="form-group">
-                <button class="btn btn-default" type="submit">
+        <div class="form-group">
+            <button class="btn btn-danger" type="submit">
                 <span aria-hidden="true" class="glyphicon glyphicon-usd"></span>
                 SELL
-                </button>
-            </div>
-        
+            </button>
+        </div>
     </form>
 </fieldset>

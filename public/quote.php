@@ -17,8 +17,10 @@
         else
         {   
             $stock=lookup($_POST["symbol"]);
+            
             if($stock==false)
             apologize("Stock symbol is invalid.");
+            
             else
             render("quote.php",$stock);
         }

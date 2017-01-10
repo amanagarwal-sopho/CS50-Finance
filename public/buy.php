@@ -12,25 +12,36 @@
     else if($_SERVER["REQUEST_METHOD"]=="POST")
     {
         $stock=lookup($_POST["symbol"]);
+        
         if($stock==false)
         apologize("Stock symbol invalid.");
+        
+        //check for fractional or negative/zero values of shares
         else if(preg_match("/^\d+$/",$_POST["shares"])==false || $_POST["shares"]==0)
         apologize("Enter a valid number of shares.");
+        
         else
         {
             $row=CS50::query("SELECT * FROM users WHERE id=?",$_SESSION["id"]);
-        
+            
+            //check if balance is sufficient
             if($stock["price"]*$_POST["shares"]>$row[0]["cash"])
             {
                 apologize("Insufficient Funds.");
             }
-        
+            //update portfolio , cash and transaction
             else
             {
                 $cost=$stock["price"]*$_POST["shares"];
-                CS50::query("INSERT INTO portfolios (user_id,symbol,share) VALUES(?,?,?) ON DUPLICATE KEY UPDATE share=share+ VALUES(share)",$_SESSION["id"],strtoupper($_POST["symbol"]),$_POST["shares"]);
+                CS50::query("INSERT INTO portfolios (user_id,symbol,share) 
+                             VALUES(?,?,?) ON DUPLICATE KEY UPDATE share=share+ VALUES(share)",
+                             $_SESSION["id"],strtoupper($_POST["symbol"]),$_POST["shares"]);
+                
                 CS50::query("UPDATE users SET cash= cash - ? WHERE id=?",$cost,$_SESSION["id"]);
-                CS50::query("INSERT INTO transactions (user_id,type,symbol,price,shares,time) VALUES(?,'BUY',?,?,?,CURRENT_TIMESTAMP)",$_SESSION["id"],$_POST["symbol"],$stock["price"],$_POST["shares"]);
+                
+                CS50::query("INSERT INTO transactions (user_id,type,symbol,price,shares,time) 
+                             VALUES(?,'BUY',?,?,?,CURRENT_TIMESTAMP)",
+                             $_SESSION["id"],$_POST["symbol"],$stock["price"],$_POST["shares"]);
             }
         }
         

@@ -13,7 +13,7 @@
             <label><input name="terms" type="checkbox"/>I agree to all terms and condition.</label>
         </div>
         <div class="form-group">
-            <button class="btn btn-default" type="submit">
+            <button class="btn btn-primary" type="submit">
                 <span aria-hidden="true" class="glyphicon glyphicon-check"></span>
                 Register
             </button>

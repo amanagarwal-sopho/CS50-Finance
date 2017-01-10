@@ -10,7 +10,7 @@
             <input autocomplete="off" autofocus class="form-control" name="confirmp" placeholder="Confirm Password" type="password"/>
         </div>
         <div class="form-group">
-            <button class="btn btn-default" type="submit">
+            <button class="btn btn-danger" type="submit">
                 <span aria-hidden="true" class="glyphicon glyphicon-cog"></span>
                 Change Password
             </button>

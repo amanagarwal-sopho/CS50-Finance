@@ -1,6 +1,4 @@
-<div class="form-group">
-    Funds have been added successfully.
-</div>
-<div class="form-group">
+<div class="conatiner-fluid">
+    Funds have been added successfully.<br/>
     Go back to <a href="index.php">Portfolio</a>.
 </div>

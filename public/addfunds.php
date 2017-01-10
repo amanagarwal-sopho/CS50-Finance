@@ -14,6 +14,7 @@
         {
             apologize("Please enter a valid amount");
         }
+        //Update cash
         else
         {
             CS50::query("UPDATE users SET cash = cash + ? WHERE id=?",$_POST["amount"],$_SESSION["id"]);
